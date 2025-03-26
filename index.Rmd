@@ -8,3 +8,37 @@ output:
 ---
 
 This is my JSC370 Final Project website.
+
+```{r load-data, eval=FALSE}
+source("process_starbucks_data.R")
+```
+
+```{r}
+p1 <- sb_locs_state |>
+  ggplot(aes(x = population, y = n_stores, text = state)) +
+  geom_point(size = 3) +
+  geom_smooth(method = "lm", se = FALSE, color = "red") +
+  labs(
+    title = "Number of Starbucks Stores vs State Population",
+    x = "Population",
+    y = "Number of Starbucks Stores"
+  ) +
+  theme_minimal()
+
+ggplotly(p1, tooltip = c("text", "x", "y"))
+```
+
+```{r}
+p2 <- sb_nutr |> 
+  ggplot(aes(x = Calories, fill = Category)) +
+  geom_histogram(binwidth = 50, alpha = 0.6, position = "identity") +
+  labs(
+    title = "Caloric Distribution of Starbucks Menu Items",
+    x = "Calories",
+    y = "Count",
+    fill = "Category"
+  ) +
+  theme_minimal()
+
+ggplotly(p2)
+```
