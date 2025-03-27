@@ -9,11 +9,11 @@ output:
 
 This is my JSC370 Final Project website.
 
-```{r load-data, eval=FALSE}
+```{r load-data, eval=FALSE, echo=FALSE}
 source("process_starbucks_data.R")
 ```
 
-```{r}
+```{r plot1, class.source="code-r-small"}
 p1 <- sb_locs_state |>
   ggplot(aes(x = population, y = n_stores, text = state)) +
   geom_point(size = 3) +
@@ -24,11 +24,9 @@ p1 <- sb_locs_state |>
     y = "Number of Starbucks Stores"
   ) +
   theme_minimal()
-
-ggplotly(p1, tooltip = c("text", "x", "y"))
 ```
 
-```{r}
+```{r plot2, class.source="code-r-small"}
 p2 <- sb_nutr |> 
   ggplot(aes(x = Calories, fill = Category)) +
   geom_histogram(binwidth = 50, alpha = 0.6, position = "identity") +
@@ -39,6 +37,20 @@ p2 <- sb_nutr |>
     fill = "Category"
   ) +
   theme_minimal()
+```
 
+## Showcasing plots {.tabset}
+
+### Starbucks Stores vs Population
+
+```{r echo=FALSE}
+ggplotly(p1, tooltip = c("text", "x", "y"))
+```
+
+### Caloric Distribution
+
+```{r echo=FALSE}
 ggplotly(p2)
 ```
+
+{-}
